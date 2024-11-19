@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: simple-go-app
-        image: ghcr.io/govindkailas/simple-go-app:main@sha256:1bdcac991bc4f5a4a6e2ddfc8ca9fe3610e47cf847da31c6543b0f0ab8fb8eb6
+        image: ghcr.io/govindkailas/simple-go-app:main
         ports:
         - containerPort: 80
         livenessProbe:
