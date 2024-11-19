@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: simple-go-app
 spec:
-  replicas: 3
+  replicas: 3 ## set the replicas here 
   selector:
     matchLabels:
       app: simple-go-app
@@ -12,6 +12,8 @@ spec:
       labels:
         app: simple-go-app
     spec:
+      securityContext:
+        runAsUser: 1001 ## run as non-root user
       containers:
       - name: simple-go-app
         image: ghcr.io/govindkailas/simple-go-app:main
@@ -23,14 +25,16 @@ spec:
             port: 80
           initialDelaySeconds: 15
           periodSeconds: 10
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "128Mi"
-          requests:
+        resources: ## run with a minimum resource
+          limits: ## max limits
             cpu: "100m"
             memory: "50Mi"
-        env:
+          requests: ## pod will start with this
+            cpu: "50m"
+            memory: "25Mi"
+        securityContext:
+          allowPrivilegeEscalation: false    
+        env: ## setting up env variables from downward api, more here, https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
         - name: POD_NAME
           valueFrom:
             fieldRef:
@@ -49,7 +53,7 @@ kind: Service
 metadata:
   name: simple-go-app-svc
 spec:
-  type: LoadBalancer
+  type: LoadBalancer ## change to ClusterIP or NodePort if needed. 
   selector:
     app: simple-go-app
   ports:
