@@ -1,3 +1,8 @@
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - main  # Or your default branch
 jobs:
   automerge: 
     name: Automerge Dependabot PRs

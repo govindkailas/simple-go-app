@@ -1,0 +1,30 @@
+name: Label Existing Dependabot PRs
+
+on:
+  workflow_dispatch: # Trigger manually
+
+jobs:
+  label-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Label PRs
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prs = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: 'open',
+              head: 'dependabot/*', // Filter for Dependabot PRs
+            });
+            for (const pr of prs.data) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: pr.number,
+                labels: ['automerge'],
+              });
+            }
