@@ -1,3 +1,4 @@
+[![Docker](https://github.com/govindkailas/simple-go-app/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/govindkailas/simple-go-app/actions/workflows/docker-publish.yml)
 
 # Pod Info Service
 
