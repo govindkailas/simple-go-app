@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
     paths-ignore:
       - '**.md' ## don't build for readme file updates!!
-      - .github
+      - '.github/**'
     # Publish semver tags as releases.
     # tags: [ 'v*.*.*' ]
     tags: [ 'v0.1.0' ]
