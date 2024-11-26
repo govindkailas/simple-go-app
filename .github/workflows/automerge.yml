@@ -12,7 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Automerge Dependabot PRs
-      uses: peter-evans/automerge-action@v2
+      uses: peter-evans/enable-pull-request-automerge@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         merge_method: squash
