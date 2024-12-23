@@ -14,5 +14,9 @@ jobs:
     - name: Automerge Dependabot PRs
       uses: peter-evans/enable-pull-request-automerge@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        merge_method: squash
+        token: ${{ secrets.GITHUB_TOKEN }}
+        merge-method: squash
+    - name: Merge PR
+      run: |
+        BRANCH_NAME=$(git branch --show-current)
+        gh pr merge -R "govindkailas/simple-go-app" --merge --auto "$BRANCH_NAME"
