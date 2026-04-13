@@ -10,7 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
       - name: Label PRs
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const { owner, repo } = context.repo;
